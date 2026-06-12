@@ -46,14 +46,14 @@ export default function RegisterPage() {
       const token = await user.getIdToken();
 
       // 4. Enviar los datos a tu Spring Boot
-      const response = await fetch("http://localhost:8081/api/users", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/registro`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${token}`,
         },
         body: JSON.stringify({
-          firebaseUid: user.uid,
+          firebase_Uid: user.uid,
           nombre: formData.nombre,
           rut: formData.rut,
           email: formData.email,
@@ -67,7 +67,7 @@ export default function RegisterPage() {
       }
 
       console.log("¡Usuario registrado con éxito!");
-      router.push("/home"); // Cambia esto a tu ruta de inicio real
+      router.push("/"); // Cambia esto a tu ruta de inicio real
 
     } catch (err: any) {
       console.error(err);
